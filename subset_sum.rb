@@ -11,19 +11,19 @@
 
 
 def subset_matrix(target)
-  # setting true and fal;se to a variable to use when filling arrays in later steps
+  # setting true and false to a variable to use when filling arrays in later steps
   t = true
   f = false
   
 
-  # Step 1 - create an array with the allergy numbers. If any match Target directly then then return that number or allergy.
+  # Step 1 - create an array with the allergy numbers. If any match Target directly then return that number or allergy.
   allergies = [0 ,1, 2, 4, 8, 16, 32, 64, 128]
 
   puts allergies.include?(target) ? "The only allergy is #{target}" : "There may be a set of Allergies...(Press enter to calculate)"
   gets.chomp
   system("clear")
 
-  #This will exit the program if we have already found the allergy cause why bother with the hectic calculations unnecessarily?
+  # This will exit the program if we have already found the allergy cause why bother with the hectic calculations unnecessarily?
   if  allergies.include?(target) == true
     exit
   end 
@@ -117,8 +117,7 @@ def subset_matrix(target)
 
    #repeat previous steps
 
-   #once at the last row we can assume all values except 0 would be false above 
-
+  
   row = allergies.length - 1
   breaker = allergies.length - 1
   results = []
@@ -146,10 +145,37 @@ def subset_matrix(target)
 
 end
 
-puts results
+#Printing the results to the screen.
 
+puts "You are allergic to the following:"
+
+results.each do |var|
+
+  case var
+
+    when 1
+      puts "Eggs"
+    when 2
+      puts "Peanuts"
+    when 4
+      puts "Shellfish"
+    when 8
+      puts "strawberries"
+    when 16
+      puts "Tomatoes"
+    when 32
+      puts "chocolates"
+    when 64
+      puts "Pollen"
+    when 128
+      puts "Cats"
+  end
+
+end
 
 end  
 
 subset_matrix(130)
+
+# Holy cow....I did it :| .... :D !!
 
