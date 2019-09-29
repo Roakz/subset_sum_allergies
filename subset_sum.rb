@@ -10,16 +10,18 @@
 # Using Dynamic Programming to solve a Subset sum problem.
 
 
-def subset_sum_calc(target)
+def subset_matrix(target)
   # setting true and fal;se to a variable to use when filling arrays in later steps
   t = true
   f = false
   
 
   # Step 1 - create an array with the allergy numbers. If any match Target directly then then return that number or allergy.
-  allergies = [1, 2, 4, 8]
+  allergies = [0 ,1, 2, 4, 8, 16, 32, 64, 128]
 
-  puts allergies.include?(target) ? "The only allergy is #{target}" : "There may be a subset of allergies..."
+  puts allergies.include?(target) ? "The only allergy is #{target}" : "There may be a set of Allergies...(Press enter to calculate)"
+  gets.chomp
+  system("clear")
 
   #This will exit the program if we have already found the allergy cause why bother with the hectic calculations unnecessarily?
   if  allergies.include?(target) == true
@@ -90,19 +92,64 @@ def subset_sum_calc(target)
    current_table_element +=1
 
   end
-
-   p table[0]
-   p table[1]
-   p table[2]
-   p table[3]
+  # Tables used for testing purposes
+  #  p  table[0] 
+  #  p  table[1]
+  #  p  table[2]
+  #  p  table[3]
 
    # Checks to see if the last element of the last array is true or false. If its true then it means there are subsets within.
-   puts table[-1][-1] == true ?  "There are matching subsets for this target" : "There are no subsets the provided number may be incorrect ? "
+   puts table[-1][-1] == true ?  "There are matching Allergies for this target.(Press enter to calculate)" : "There are no matches to the provided number it may be incorrect" && exit
+    
+   gets.chomp
+   system("clear")
+
+   # Step 4 - Finding the sets
+
+   # we basically need to step backwards through our matrix and check the elements like so.
+
+   # check the last array element does the true match the last element of the previous array? (if the last elememt  of this array isnt true then there are no subsets anyway)
+
+   # If false return value from allergy array that this array coresponds to then move up an array and count back the current 
+   # matching allergy array value backwards. 
+
+   # if true then does the last element of the above array match the last element from the array above it?
+
+   #repeat previous steps
+
+   #once at the last row we can assume all values except 0 would be false above 
+
+  row = allergies.length - 1
+  breaker = allergies.length - 1
+  results = []
+  table1 = -1
+  element1 = -1
+  table2 = -2
+  counter = 0
+  
+  until counter == breaker
+
+  if table[table1][element1] != table[table2][element1]
+    results << allergies[row]
+    table1 -= 1
+    table2 -= 1
+    element1 -= allergies[row]
+    row -= 1
+    counter += 1
+
+  else   
+    table1 -= 1
+    table2 -= 1
+    row -=1
+    counter += 1
+  end
+
+end
+
+puts results
+
 
 end  
 
-subset_sum_calc(7)
-
-
-
+subset_matrix(130)
 
