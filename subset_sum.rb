@@ -14,11 +14,12 @@ def subset_sum_calc(target)
   # setting true and fal;se to a variable to use when filling arrays in later steps
   t = true
   f = false
+  
 
   # Step 1 - create an array with the allergy numbers. If any match Target directly then then return that number or allergy.
-  allergies = [1, 2, 4, 8,]
+  allergies = [1, 2, 4, 8]
 
-  puts allergies.include?(target) ? "The only allergy is #{target}" : "There is more than one allergy"
+  puts allergies.include?(target) ? "The only allergy is #{target}" : "There may be a subset of allergies..."
 
   #This will exit the program if we have already found the allergy cause why bother with the hectic calculations unnecessarily?
   if  allergies.include?(target) == true
@@ -50,28 +51,56 @@ def subset_sum_calc(target)
   row1 = [] # empty array to append the true or flase to.
   target_array.each {|num| num == allergies[element] ?  row1 << t : row1 << f}
   row1[0] = t #the first column is set to true all the way down for this algorithm to work
-  p row1
   element += 1 # Adding 1 to the element so we can compare the next allergy number in row 2
 
   # Creating row 2
 
-  row2 = []
-  row1_element = 0 
+  table = [row1, 2, 3, 4] # An array to hold the other row arrays
+  table_element = 1
+  current_table_element = 0
+
+  while table_element < allergies.length
+
+  table[table_element] = []
+  previous_row_element = 0 
+  
 
   # until the length of the new row is equal to the allergy element value that we are comparing append the corresponding row 1 element value 
   # to the new row 
-   while row2.length < allergies[element]
-       row2 << row1[row1_element]
-       row1_element += 1
+   while table[table_element].length < allergies[element]
+       table[table_element] << table[current_table_element][previous_row_element]
+       previous_row_element += 1
    end
 
-   p row2
+   #row element is reset so that it the value of the allergy array back in the row above. i.e row 1
+   previous_row_element -= previous_row_element
+
+  
+   # Appending the corrosponding element from the above row to the new row. i.e the value of allergies array in this case 2 back.
+   # and matching its true false value 
+ 
+
+   while table[table_element].length < table[current_table_element].length
+   table[table_element] << table[current_table_element][previous_row_element]
+   previous_row_element += 1
+   end
+
+   element += 1
+   table_element +=1
+   current_table_element +=1
+
+  end
+
+   p table[0]
+   p table[1]
+   p table[2]
+   p table[3]
+
+   # Checks to see if the last element of the last array is true or false. If its true then it means there are subsets within.
+   puts table[-1][-1] == true ?  "There are matching subsets for this target" : "There are no subsets the provided number may be incorrect ? "
 
 end  
 
-# Goodmorning! you need to compare row1 and row2 elements and append a true or false value to row 2 that is equal to row1 elememt 
-# but back the number of elements that coresponds with the value of the element of the allergies array that we are creating
-# the new row from. i.e we are comparing integer 2 so we will move back 2 elements in row1 and append the corresponding value to row2.
 subset_sum_calc(7)
 
 
