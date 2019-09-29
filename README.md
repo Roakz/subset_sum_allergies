@@ -14,10 +14,14 @@ pollen (64)<br>
 cats (128)<br><br>
 
 so if a person was allergic to everything there score would be 255 <br>
-If they werr allergic to eggs, peanuts and cats their score would be 131<br><br>
+If they were allergic to eggs, peanuts and cats their score would be 131<br><br>
 
 <h4>Desired outcome</h4>
 
 **-** List the combination of allergies based on a total score given.<br><br>
 
 **Lets do this!!**
+
+**This problem is solved!**<br><Br>
+
+Any feeback or advice welcome!
